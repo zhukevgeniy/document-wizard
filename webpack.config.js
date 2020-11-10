@@ -1,10 +1,9 @@
 const path = require("path");
-// const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const packageJSON = require("./package.json");
 
-/** @type {webpack.Configuration} */
 module.exports = {
   mode: "development",
 
@@ -40,8 +39,8 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "serviceA",
-      library: { type: "var", name: "serviceA" },
+      name: "DocumentWizard",
+      library: { type: "var", name: "DocumentWizard" },
       filename: "remoteEntry.js",
       exposes: {
         "./Wizard": "./src/components/Wizard/index.js",
@@ -57,7 +56,7 @@ module.exports = {
         },
       },
     }),
-    // new ReactRefreshWebpackPlugin(),
+    new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),

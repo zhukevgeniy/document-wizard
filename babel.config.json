@@ -13,7 +13,7 @@
       "presets": [
         ["@babel/preset-react", { "runtime": "automatic", "development": true }]
       ],
-//      "plugins": ["react-refresh/babel"]
+      "plugins": ["react-refresh/babel"]
     },
     "test": {
       "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]]
