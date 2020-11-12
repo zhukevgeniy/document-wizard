@@ -1,6 +1,7 @@
+import React from "react";
 import { render } from "react-dom";
-import { Root } from "components/Root";
+import { RootWrapper } from "@Dev/components/RootWrapper";
 
 const rootNode = document.getElementById("root");
 
-render(<Root />, rootNode);
+render(<RootWrapper />, rootNode);
