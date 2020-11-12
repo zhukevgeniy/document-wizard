@@ -3,6 +3,7 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const packageJSON = require("./package.json");
+// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = {
   mode: "development",
@@ -30,6 +31,9 @@ module.exports = {
 
   resolve: {
     modules: ["node_modules", path.resolve(__dirname, "src")],
+    alias: {
+      symlink: false,
+    },
   },
 
   devServer: {
@@ -43,16 +47,13 @@ module.exports = {
       library: { type: "var", name: "DocumentWizard" },
       filename: "remoteEntry.js",
       exposes: {
-        "./Wizard": "./src/components/Wizard/index.js",
+        "./Wizard": "./src/@DocumentWizard/index.js",
       },
       shared: {
         react: {
+          singleton: true,
+          strictVersion: true,
           requiredVersion: packageJSON.dependencies.react,
-          singleton: true,
-        },
-        "react-dom": {
-          requiredVersion: packageJSON.dependencies["react-dom"],
-          singleton: true,
         },
       },
     }),
@@ -60,5 +61,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
+    // new BundleAnalyzerPlugin(),
   ],
 };
